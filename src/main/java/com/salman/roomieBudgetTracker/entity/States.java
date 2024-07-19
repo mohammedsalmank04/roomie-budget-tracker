@@ -9,14 +9,14 @@ public class States {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int stateId;
 
-    private String stateName;
+    private String name;
 
     public States() {
     }
 
-    public States(int stateId, String stateName) {
+    public States(int stateId, String name) {
         this.stateId = stateId;
-        this.stateName = stateName;
+        this.name = name;
     }
 
     public int getStateId() {
@@ -27,19 +27,20 @@ public class States {
         this.stateId = stateId;
     }
 
-    public String getStateName() {
-        return stateName;
+
+    public String getName() {
+        return name;
     }
 
-    public void setStateName(String stateName) {
-        this.stateName = stateName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
         return "States{" +
                 "stateId=" + stateId +
-                ", stateName='" + stateName + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

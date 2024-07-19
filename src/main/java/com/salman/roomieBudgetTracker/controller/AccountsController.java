@@ -31,10 +31,11 @@ public class AccountsController {
     public String register(Model model){
         System.out.println("-------------IN REGISTER----------------");
         List<States> statesList = statesService.getAll();
-
+        String selectedState = "";
         model.addAttribute("account",new Accounts());
         model.addAttribute("address",new Address());
         model.addAttribute("getAllStates",statesList);
+        model.addAttribute("selectedState",selectedState);
 
 
         return "register";
@@ -43,28 +44,23 @@ public class AccountsController {
     @PostMapping("/register/new")
     public String accountRegistration(@ModelAttribute("account") Accounts accounts,
                                       Model model,
-                                      @ModelAttribute("address") Address address
+                                      @ModelAttribute("address") Address address,
+                                      @ModelAttribute("selectedState") String selectedState
                                       ){
 
         System.out.println("------------FROM REGISTER/NEW------------");
+        System.out.println("get state name:"+address.getStateName());
+        System.out.println(selectedState);
         System.out.println(accounts);
         System.out.println(address);
-        /*System.out.println(accounts);
-        model.addAttribute("account",accounts);
-        model.addAttribute("address",new Address());
-        List<States> statesList = statesService.getAll();
-        model.addAttribute("getAllStates",statesList);*/
+        Address newAdress = address;
+        accounts.setAddressId(address);
+        accountsService.addNewAccount(accounts);
+
 
         return "demo-success-page";
 
     }
 
-    /*@PostMapping("register/register/new/addAddress")
-    public String accountAddressRegistration(@ModelAttribute("account")Accounts accounts,
-                                             @ModelAttribute("address") Address address){
-        System.out.println(accounts);
-        System.out.println(address);
 
-        return "demo-success-page";
-    }*/
 }

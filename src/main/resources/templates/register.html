@@ -95,20 +95,21 @@
                    placeholder="address"
             >
           </div>
-          <div class = "form-item">
-            <label> Enter State</span></label>
-            <select
-              required
-              class = "form-control"
-              th:feild = "*{stateName}">
-
-              <th:block th:each ="sn: ${getAllStates}">
-                <option th:text = "${sn.stateName}"
-                        th:value = "${sn.stateName}">
-
-                </option>
-              </th:block>
-            </select>
+          <div class="row">
+            <div class="col-md-12 form-group">
+              <select
+                      required
+                      class="form-control"
+                      th:field="*{stateName}"
+              >
+                <th:block th:each="i :${getAllStates}">
+                  <option
+                          th:text="${i.name}"
+                          th:value="${i.name}"
+                  ></option>
+                </th:block>
+              </select>
+            </div>
           </div>
         </div>
 
@@ -119,7 +120,9 @@
 
     </form>
   </div>
-
+  <div class="login-right">
+    <img th:src = "@{/images/indexImage.png}" alt="">
+  </div>
 </div>
 
 

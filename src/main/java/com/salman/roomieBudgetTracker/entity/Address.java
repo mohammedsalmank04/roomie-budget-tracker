@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer addressId;
+    private int addressId;
 
     private String address1;
 
@@ -59,11 +59,13 @@ public class Address {
     }
 
     public void setZipCode(int zipCode) {
-        System.out.println(zipCode);
+
         this.zipCode = zipCode;
     }
 
     public void setStateName(String stateName) {
+
+        System.out.println("-----------In state name sst---"+ stateName);
         this.stateName = stateName;
     }
 
@@ -72,7 +74,7 @@ public class Address {
     }
 
     public void setAddress1(String address1) {
-        System.out.println(address1);
+        ;
         this.address1 = address1;
     }
 
