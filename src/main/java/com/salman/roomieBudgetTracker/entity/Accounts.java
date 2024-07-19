@@ -1,4 +1,4 @@
-//************ PENDING TO ADD ADDRESS ****************//
+
 
 package com.salman.roomieBudgetTracker.entity;
 
@@ -23,6 +23,10 @@ public class Accounts {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userTypeId", referencedColumnName = "userTypeId")
     private UsersType usersTypeId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
+    private Address addressId;
+
 
     public Accounts() {
     }
@@ -33,6 +37,15 @@ public class Accounts {
         this.password = password;
         this.registrationDate = registrationDate;
         this.usersTypeId = usersTypeId;
+    }
+
+    public Accounts(int accountId, String email, String password, Date registrationDate, UsersType usersTypeId, Address addressId) {
+        this.accountId = accountId;
+        this.email = email;
+        this.password = password;
+        this.registrationDate = registrationDate;
+        this.usersTypeId = usersTypeId;
+        this.addressId = addressId;
     }
 
     public int getAccountId() {
@@ -48,6 +61,7 @@ public class Accounts {
     }
 
     public void setEmail(String email) {
+        System.out.println(email);
         this.email = email;
     }
 
@@ -73,6 +87,22 @@ public class Accounts {
 
     public void setUserTypeId(UsersType usersTypeId) {
         this.usersTypeId = usersTypeId;
+    }
+
+    public UsersType getUsersTypeId() {
+        return usersTypeId;
+    }
+
+    public void setUsersTypeId(UsersType usersTypeId) {
+        this.usersTypeId = usersTypeId;
+    }
+
+    public Address getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Address addressId) {
+        this.addressId = addressId;
     }
 
     @Override

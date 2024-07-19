@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang = "en"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}"/>
+    <!--<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>-->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <title>Add Address</title>
+</head>
+<body>
+<header id="header">
+    <div class="logo"><a href="">Roomie Budget Tracker</a> </div>
+    <div class="hamburger" id="toggle">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <nav class="nav-bar" id="navbar">
+        <ul>
+            <!-- This area is for header home, login, contacts etccc-->
+
+        </ul>
+    </nav>
+</header>
+
+<div class="container" id="home">
+    <div class="login-left">
+        <div class="login-header">
+            <h1>Create Account</h1>
+
+        </div>
+        <form th:action="@{register/new/addAddress}" class="login-form" autocomplete="off"  method="post" th:object = "${address}">
+            <div class="login-content">
+
+                <div class="form-item">
+                    <label >Enter Zip code</span></label>
+                    <input type="number"
+                           name="zipCode"
+                           class = "form-control"
+                           th:feild = "*{zipCode}"
+                           placeholder="Zip Code">
+                </div>
+
+                <div class="form-item">
+                    <label >Enter Address</span></label>
+                    <input type="text"
+                           name="address1"
+                           class = "form-control"
+                           th:feild = "*{address1}"
+                           placeholder="address">
+                </div>
+
+
+
+                <div class="form-item">
+                    <label >Enter Country</span></label>
+                    <input type="text"
+                           name="country"
+                           class = "form-control"
+                           th:feild = "*{country}"
+                           placeholder="Country">
+                </div>
+
+                <div class="form-item">
+                    <label >Enter State</span></label>
+                    <select
+                            required
+                            class = "form-control"
+                            th:feild = "*{stateName}">
+
+                        <th:block th:each = "sn: ${getAllStates}">
+                            <option th:text = "${sn.stateName}"
+                                    th:value = "${sn.stateName}">
+
+                            </option>
+                        </th:block>
+                    </select>
+
+                </div>
+
+
+
+
+
+
+
+            </div>
+            <div class="bg-grey">
+
+
+                <button type="submit">Create Account</button>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

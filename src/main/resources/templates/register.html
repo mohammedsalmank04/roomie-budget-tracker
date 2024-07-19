@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang = "en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
   <meta charset="UTF-8">
@@ -34,87 +34,95 @@
 <div class="container" id="home">
   <div class="login-left">
     <div class="login-header">
-      <h1>Create User</h1>
-      <!--<p>Please login </p>-->
+      <h1>Create Account</h1>
+
     </div>
-    <form action="" class="login-form" autocomplete="off">
-      <div class="login-content">
-        <div class="form-item">
+    <form th:action="@{register/new}"
+          th:object ="${account}"
+          class="login-form"
+          autocomplete="off"
+          method="post">
+      <div class = "login-content">
 
-          <input type="email" name=""  placeholder="example@email.com">
+        <div class = "form-item">
+          <label> Enter Email</span></label>
+          <input type="email"
+                 name = "email"
+                 class = "form-control"
+                 th:feild = "*{email}"
+                 placeholder="example@email.com"
+          >
         </div>
 
-        <div class="form-item">
-
-          <input type="email" name=""  placeholder="example@email.com">
+        <div class = "form-item">
+          <label> Enter password</span></label>
+          <input type="password"
+                 name = "password"
+                 class = "form-control pwd"
+                 th:feild = "*{password}"
+                 placeholder="password"
+          >
         </div>
 
-        <div class="form-item">
+        <div th:object = "${address}">
 
-          <input type="email" name=""  placeholder="example@email.com">
+          <div class = "form-item">
+            <label> Enter Address</span></label>
+            <input type="text"
+                   name = "address1"
+                   class = "form-control"
+                   th:feild = "*{address1}"
+                   placeholder="address"
+            >
+          </div>
+
+          <div class = "form-item">
+            <label> Enter Zip Code</span></label>
+            <input type="number"
+                   name = "zipCode"
+                   class = "form-control"
+                   th:feild = "*{zipCode}"
+                   placeholder="xxxx"
+            >
+          </div>
+
+          <div class = "form-item">
+            <label> Enter Country</span></label>
+            <input type="text"
+                   name = "country"
+                   class = "form-control"
+                   th:feild = "*{country}"
+                   placeholder="address"
+            >
+          </div>
+          <div class = "form-item">
+            <label> Enter State</span></label>
+            <select
+              required
+              class = "form-control"
+              th:feild = "*{stateName}">
+
+              <th:block th:each ="sn: ${getAllStates}">
+                <option th:text = "${sn.stateName}"
+                        th:value = "${sn.stateName}">
+
+                </option>
+              </th:block>
+            </select>
+          </div>
         </div>
 
-        <div class="form-item">
-
-          <input type="email" name=""  placeholder="example@email.com">
-        </div>
-
-        <div class="form-item">
-
-          <input type="email" name=""  placeholder="example@email.com">
-        </div>
-
-        <div class="form-item">
-          <label for="password">Enter Password</span></label>
-          <label for="text"></label>
-          <input type="password" name="" id="password" placeholder="Enter your Password" required class="pass-key">
-          <!--<img src="eye-close.png" id="eyeicon" class="password-toggle">-->
-          <!-- <span class="show">Show</span> -->
-        </div>
-        <!--<div class="form-item">
-            <div class="checkbox">
-                <input type="checkbox" name="" id="rememberMeCheckbox" checked>
-                <label for="rememberMeCheckbox" class="checkboxlabel">Remember Me</label>
-            </div>-->
-        <!--</div>-->
-        <!--<div class="remember-forgot">
-            <a href="#">Forgot password?</a>
-        </div>-->
-
-        <div class="bg-grey">
-          <div class="sing-up">Don't have an account? <a href=""class="text-link" id="sign-up" >Sign up</a></div>
-          <!--<a href="#register" class="link-register">Sign Up</a>-->
-        </div>
-
-        <button type="submit">Log in</button>
       </div>
-      <!--<div class="login-footer">
-          <a href="">
-              <img width="30" src="https://img.icons8.com/color/512/facebook-new.png" alt="facebook">Facebook
-          </a>
-          <a href="">
-              <img width="30" src="https://img.icons8.com/fluency/512/google-logo.png" alt="google">Google
-          </a>
-      </div>-->
+      <div class="bg-grey">
+        <button type="submit">Create Account</button>
+      </div>
+
     </form>
   </div>
 
 </div>
 
-<!--<script>
-    let eyeicon = document.getElementById("eyeicon");
-    let password = document.getElementById("password");
 
-    eyeicon.onclick = function() {
-        if (password.type == "password"){
-            password.type = "text";
-            eyeicon.src = "eye-open.png";
-        }else{
-            password.type = "password";
-            eyeicon.src = "eye-close.png";
-        }
-    }
-</script>-->
 
 <script type="text/javascript" th:src="@{/js/main.js}"></script>
 </body>

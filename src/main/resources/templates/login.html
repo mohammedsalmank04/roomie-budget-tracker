@@ -61,7 +61,7 @@
                     </div>-->
 
                     <div class="bg-grey">
-                        <div class="sing-up">Don't have an account? <a href=""class="text-link" id="sign-up" >Sign up</a></div>
+                        <div class="sing-up">Don't have an account? <a th:href="@{/register}"class="text-link" >Sign up</a></div>
                         <!--<a href="#register" class="link-register">Sign Up</a>-->
                     </div>
     
@@ -82,7 +82,7 @@
         </div>
     </div>
 
-    <!--<script>
+    <script>
 		let eyeicon = document.getElementById("eyeicon");
 		let password = document.getElementById("password");
 
@@ -95,7 +95,7 @@
 				eyeicon.src = "eye-close.png";
 			}
 		} 
-	</script>-->
+	</script>
 
     <script type="text/javascript" th:src="@{/js/main.js}"></script>
 </body>

@@ -2,6 +2,8 @@ package com.salman.roomieBudgetTracker.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users_type")
 public class UsersType {
@@ -11,12 +13,20 @@ public class UsersType {
 
     private String userTypeName;
 
+    @OneToMany(targetEntity = Accounts.class, mappedBy = "usersTypeId")
+    private List<Accounts> accounts;
     public UsersType() {
     }
 
     public UsersType(int userTypeId, String userTypeName) {
         this.userTypeId = userTypeId;
         this.userTypeName = userTypeName;
+    }
+
+    public UsersType(int userTypeId, String userTypeName, List<Accounts> accounts) {
+        this.userTypeId = userTypeId;
+        this.userTypeName = userTypeName;
+        this.accounts = accounts;
     }
 
     public int getUserTypeId() {
@@ -33,5 +43,22 @@ public class UsersType {
 
     public void setUserTypeName(String userTypeName) {
         this.userTypeName = userTypeName;
+    }
+
+    public List<Accounts> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Accounts> accounts) {
+        this.accounts = accounts;
+    }
+
+    @Override
+    public String toString() {
+        return "UsersType{" +
+                "userTypeId=" + userTypeId +
+                ", userTypeName='" + userTypeName + '\'' +
+                ", accounts=" + accounts +
+                '}';
     }
 }
