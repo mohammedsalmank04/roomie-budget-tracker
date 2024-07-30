@@ -1,9 +1,17 @@
 package com.salman.roomieBudgetTracker.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "states")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class States {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,36 +19,5 @@ public class States {
 
     private String name;
 
-    public States() {
-    }
 
-    public States(int stateId, String name) {
-        this.stateId = stateId;
-        this.name = name;
-    }
-
-    public int getStateId() {
-        return stateId;
-    }
-
-    public void setStateId(int stateId) {
-        this.stateId = stateId;
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "States{" +
-                "stateId=" + stateId +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }
