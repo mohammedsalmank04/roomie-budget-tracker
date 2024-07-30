@@ -48,14 +48,14 @@ public class AccountsController {
                                       @ModelAttribute("selectedState") String selectedState
                                       ){
 
-        System.out.println("------------FROM REGISTER/NEW------------");
+        /*System.out.println("------------FROM REGISTER/NEW------------");
         System.out.println("get state name:"+address.getStateName());
         System.out.println(selectedState);
         System.out.println(accounts);
-        System.out.println(address);
-        Address newAdress = address;
-        accounts.setAddressId(address);
-        accountsService.addNewAccount(accounts);
+        //System.out.println(address);*/
+
+        //accounts.setAddressId(address);
+        accountsService.addNewAccount(accounts,address);
 
 
         return "demo-success-page";

@@ -4,10 +4,7 @@ package com.salman.roomieBudgetTracker.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,11 +16,11 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "accounts")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Table(name = "accounts")
 public class Accounts implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +31,7 @@ public class Accounts implements UserDetails {
     private String password;
     @DateTimeFormat(pattern = "dd-mm-yyyy")
     private Date registrationDate;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "userTypeId", referencedColumnName = "userTypeId")
     private UsersType usersTypeId;
     @OneToOne(cascade = CascadeType.ALL)
@@ -53,6 +50,9 @@ public class Accounts implements UserDetails {
     @Override
     public String getUsername() {
         return null;
+    }
+    public String getPassword(){
+        return this.password;
     }
 
     @Override

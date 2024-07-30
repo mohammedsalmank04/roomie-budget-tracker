@@ -1,10 +1,7 @@
 package com.salman.roomieBudgetTracker.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -14,6 +11,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class UsersType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +19,7 @@ public class UsersType {
 
     private String userTypeName;
 
-    @OneToMany(targetEntity = Accounts.class, mappedBy = "usersTypeId")
-    private List<Accounts> accounts;
+    /*@OneToMany(targetEntity = Accounts.class, mappedBy = "usersTypeId")
+    private List<Accounts> accounts;*/
 
 }
