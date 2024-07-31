@@ -37,16 +37,16 @@
                 <h1>Welcome</h1>
                 <!--<p>Please login </p>-->
             </div>
-            <form th:object="${account}" th:action="@{/login}" method="post" class="login-form" autocomplete="off">
+            <form th:action="@{/login}" method="post" class="login-form" autocomplete="off">
                 <div class="login-content">
                     <div class="form-item">
                         <label for="email">Enter Email</label>
-                        <input field="{email}" type="email"  placeholder="example@email.com">
+                        <input id="email" th:name="email" type="email"  placeholder="example@email.com">
                     </div>
                     <div class="form-item">
                         <label for="password">Enter Password</span></label>
                         <label for="text"></label>
-                        <input field="{password}" type="password"  placeholder="Enter your Password" required class="pass-key">
+                        <input id="password" type="password" th:name="password"  placeholder="Enter your Password" required class="pass-key">
                         <!--<img src="eye-close.png" id="eyeicon" class="password-toggle">-->
                         <!-- <span class="show">Show</span> -->
                     </div>

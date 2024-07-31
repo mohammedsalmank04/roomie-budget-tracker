@@ -7,12 +7,11 @@ import com.salman.roomieBudgetTracker.entity.States;
 import com.salman.roomieBudgetTracker.service.AccountsService;
 import com.salman.roomieBudgetTracker.service.StatesService;
 
+import com.salman.roomieBudgetTracker.util.AuthenticateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -48,13 +47,7 @@ public class AccountsController {
                                       @ModelAttribute("selectedState") String selectedState
                                       ){
 
-        /*System.out.println("------------FROM REGISTER/NEW------------");
-        System.out.println("get state name:"+address.getStateName());
-        System.out.println(selectedState);
-        System.out.println(accounts);
-        //System.out.println(address);*/
 
-        //accounts.setAddressId(address);
         accountsService.addNewAccount(accounts,address);
 
 
@@ -62,11 +55,16 @@ public class AccountsController {
 
     }
 
-   /* @GetMapping("/login")
-    public String login(Model model){
-
-        return "login";
-    }*/
+   @PostMapping("/login")
+    public String login(@RequestParam(value = "email") String email,
+                        @RequestParam(value = "password")  String password
+   ){
+       System.out.println(email);
+       System.out.println("IN LOGIN POST MAPPING METHOD");
+       var user = AuthenticateRequest.builder().email(email).password(password).build();
+        accountsService.authenticate(user);
+        return "demo-success-page";
+   }
 
 
 }

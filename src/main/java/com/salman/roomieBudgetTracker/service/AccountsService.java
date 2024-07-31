@@ -6,8 +6,11 @@ import com.salman.roomieBudgetTracker.entity.UsersType;
 import com.salman.roomieBudgetTracker.repository.AccountsRepository;
 import com.salman.roomieBudgetTracker.repository.AddressRepository;
 import com.salman.roomieBudgetTracker.repository.UsersTypeRepository;
+import com.salman.roomieBudgetTracker.util.AuthenticateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +26,7 @@ public class AccountsService {
     private final AddressRepository addressRepository;
     private final JwtService jwtService;
     private final UsersTypeRepository usersTypeRepository;
+    private final AuthenticationManager authenticationManager;
 
 
     public void addNewAccount(Accounts account, Address address){
@@ -30,7 +34,8 @@ public class AccountsService {
         account.setRegistrationDate(new Date(System.currentTimeMillis()));
         account.setAddressId(address);
         account.setPassword(passwordEncoder.encode(account.getPassword()));
-        account.setUsersTypeId(usersTypeList.get(1));
+        System.out.println("User type at index 0 :"+usersTypeList.get(0));
+        account.setUsersTypeId(usersTypeList.get(0));
 
         System.out.println(usersTypeList);
         System.out.println(account);
@@ -43,6 +48,17 @@ public class AccountsService {
         accountsRepository.save(account);
         var jwtToken = jwtService.generateToken(account);
         System.out.println("TOKEN:- "+jwtToken);
+
+    }
+
+    public void authenticate(AuthenticateRequest request){
+        System.out.println(request);
+        authenticationManager.authenticate(
+          new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword())
+        );
+        var user = accountsRepository.findByEmail(request.getEmail()).orElseThrow();
+        var jwtToken = jwtService.generateToken(user);
+        System.out.println("User :"+user+" Has logged in");
 
     }
 }
