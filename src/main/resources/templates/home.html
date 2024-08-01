@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang = "en"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -10,24 +11,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    <title>Login-Form</title>
+    <title>Home</title>
 </head>
 
 <body>
 <header id="header">
-    <div class="logo"><a href="">Minimal</a> </div>
+    <div class="logo"><a href="">Roomie Budget Tracker</a> </div>
     <div class="hamburger" id="toggle">
         <div class="line"></div>
         <div class="line"></div>
         <div class="line"></div>
     </div>
+
     <nav class="nav-bar" id="navbar">
         <ul>
             <li>
                 <a href="index.html" class="active">Home</a>
             </li>
             <li>
-                <a href="#product">Products</a>
+                <a href="#product">Add Bill</a>
             </li>
             <li>
                 <a href="#about">About Us</a>
@@ -37,12 +39,29 @@
             </li>
             <div class="login">
                 <li>
-                    <a href="login.html"  class="navlogin active">Login</a>
+                    <a href="login.html"  class="navlogin active">Logout</a>
                 </li>
             </div>
         </ul>
     </nav>
 </header>
+        <div class="account-address">
+       <p
+               th:if="${address.address1 != null}"
+               th:text=" 'Welcome: ' + ${address.address1}"
+
+       ></p>
+        </div>
+
+
+
+
+<P th:if="${account.email != null}"
+   th:text="${account.email}"
+
+       class="nav-item nav-link px-2 me-3">
+
+</P>
 <script src="javascript/index.js"></script>
 </body>
 

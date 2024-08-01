@@ -4,27 +4,29 @@ import com.salman.roomieBudgetTracker.entity.Accounts;
 
 import com.salman.roomieBudgetTracker.entity.Address;
 import com.salman.roomieBudgetTracker.entity.States;
+import com.salman.roomieBudgetTracker.repository.AccountsRepository;
 import com.salman.roomieBudgetTracker.service.AccountsService;
 import com.salman.roomieBudgetTracker.service.StatesService;
 
 import com.salman.roomieBudgetTracker.util.AuthenticateRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
+@RequiredArgsConstructor
 public class AccountsController {
 
     private final StatesService statesService;
     private final AccountsService accountsService;
-    @Autowired
-    public AccountsController(StatesService statesService, AccountsService accountsService) {
-        this.statesService = statesService;
-        this.accountsService = accountsService;
-    }
+    private final AccountsRepository accountsRepository;
+
 
     @GetMapping("/register")
     public String register(Model model){
@@ -57,12 +59,19 @@ public class AccountsController {
 
    @PostMapping("/login")
     public String login(@RequestParam(value = "email") String email,
-                        @RequestParam(value = "password")  String password
+                        @RequestParam(value = "password")  String password,
+                        Model model
    ){
        /*System.out.println(email);
        System.out.println("IN LOGIN POST MAPPING METHOD");*/
        var user = AuthenticateRequest.builder().email(email).password(password).build();
-        accountsService.authenticate(user);
+       Accounts account= accountsService.authenticate(user);
+
+        Address address = account.getAddressId();
+       System.out.println(account);
+        model.addAttribute("account",account);
+        model.addAttribute("address",address);
+
         return "home";
    }
 

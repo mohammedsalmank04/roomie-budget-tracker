@@ -345,10 +345,9 @@ button:hover{
         display: none;
     }
 
-    
-
-    
-   
-
-
 }
+.account-address{
+        font-size: 3    0px;
+            font-weight: bold;
+            color: black;
+    }

@@ -51,14 +51,16 @@ public class AccountsService {
 
     }
 
-    public void authenticate(AuthenticateRequest request){
+    public Accounts authenticate(AuthenticateRequest request){
         System.out.println(request);
         authenticationManager.authenticate(
           new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword())
         );
+
         var user = accountsRepository.findByEmail(request.getEmail()).orElseThrow();
         var jwtToken = jwtService.generateToken(user);
        // System.out.println("User :"+user+" Has logged in");
+        return user;
 
     }
 }
