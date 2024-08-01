@@ -63,7 +63,7 @@ public class AccountsController {
        System.out.println("IN LOGIN POST MAPPING METHOD");*/
        var user = AuthenticateRequest.builder().email(email).password(password).build();
         accountsService.authenticate(user);
-        return "demo-success-page";
+        return "home";
    }
 
 
