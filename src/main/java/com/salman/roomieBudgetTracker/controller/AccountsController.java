@@ -28,7 +28,7 @@ public class AccountsController {
 
     @GetMapping("/register")
     public String register(Model model){
-        System.out.println("-------------IN REGISTER----------------");
+        //System.out.println("-------------IN REGISTER----------------");
         List<States> statesList = statesService.getAll();
         String selectedState = "";
         model.addAttribute("account",new Accounts());
@@ -59,8 +59,8 @@ public class AccountsController {
     public String login(@RequestParam(value = "email") String email,
                         @RequestParam(value = "password")  String password
    ){
-       System.out.println(email);
-       System.out.println("IN LOGIN POST MAPPING METHOD");
+       /*System.out.println(email);
+       System.out.println("IN LOGIN POST MAPPING METHOD");*/
        var user = AuthenticateRequest.builder().email(email).password(password).build();
         accountsService.authenticate(user);
         return "demo-success-page";

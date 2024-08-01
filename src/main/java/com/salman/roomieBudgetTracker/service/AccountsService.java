@@ -34,11 +34,11 @@ public class AccountsService {
         account.setRegistrationDate(new Date(System.currentTimeMillis()));
         account.setAddressId(address);
         account.setPassword(passwordEncoder.encode(account.getPassword()));
-        System.out.println("User type at index 0 :"+usersTypeList.get(0));
+        //System.out.println("User type at index 0 :"+usersTypeList.get(0));
         account.setUsersTypeId(usersTypeList.get(0));
 
-        System.out.println(usersTypeList);
-        System.out.println(account);
+        /*System.out.println(usersTypeList);
+        System.out.println(account);*/
 
 
         //UsersType accountType = new UsersType(1,"Root");
@@ -58,7 +58,7 @@ public class AccountsService {
         );
         var user = accountsRepository.findByEmail(request.getEmail()).orElseThrow();
         var jwtToken = jwtService.generateToken(user);
-        System.out.println("User :"+user+" Has logged in");
+       // System.out.println("User :"+user+" Has logged in");
 
     }
 }
