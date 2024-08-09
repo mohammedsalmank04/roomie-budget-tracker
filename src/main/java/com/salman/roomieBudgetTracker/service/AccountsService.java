@@ -2,9 +2,11 @@ package com.salman.roomieBudgetTracker.service;
 
 import com.salman.roomieBudgetTracker.entity.Accounts;
 import com.salman.roomieBudgetTracker.entity.Address;
+import com.salman.roomieBudgetTracker.entity.TokenBlacklist;
 import com.salman.roomieBudgetTracker.entity.UsersType;
 import com.salman.roomieBudgetTracker.repository.AccountsRepository;
 import com.salman.roomieBudgetTracker.repository.AddressRepository;
+import com.salman.roomieBudgetTracker.repository.TokenBlacklistRepository;
 import com.salman.roomieBudgetTracker.repository.UsersTypeRepository;
 import com.salman.roomieBudgetTracker.util.AuthenticateRequest;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,7 @@ public class AccountsService {
     private final JwtService jwtService;
     private final UsersTypeRepository usersTypeRepository;
     private final AuthenticationManager authenticationManager;
+    private final TokenBlacklistRepository tokenBlacklistRepository;
 
 
     public void addNewAccount(Accounts account, Address address){
@@ -45,22 +48,38 @@ public class AccountsService {
         //account.setUsersTypeId(accountType);
         //addressRepository.save(account.getAddressId());
 
-        accountsRepository.save(account);
+        Accounts savedAccount = accountsRepository.save(account);
         var jwtToken = jwtService.generateToken(account);
-        System.out.println("TOKEN:- "+jwtToken);
+        var token = TokenBlacklist.builder().account(savedAccount).token(jwtToken).expired(false).build();
+        tokenBlacklistRepository.save(token);
+       // System.out.println("TOKEN:- "+jwtToken);
 
     }
 
     public Accounts authenticate(AuthenticateRequest request){
-        System.out.println(request);
+        //System.out.println(request);
         authenticationManager.authenticate(
           new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword())
         );
 
         var user = accountsRepository.findByEmail(request.getEmail()).orElseThrow();
         var jwtToken = jwtService.generateToken(user);
+        var token = TokenBlacklist.builder().account(user).token(jwtToken).expired(false).build();
+        revokedAllAccountToken(user);
+        tokenBlacklistRepository.save(token);
        // System.out.println("User :"+user+" Has logged in");
         return user;
 
+    }
+
+    public void revokedAllAccountToken(Accounts account){
+        var validToken = tokenBlacklistRepository.findAllValidTokenByUser(account.getAccountId());
+        if(validToken.isEmpty()){
+            return;
+        }
+        validToken.forEach(t-> {
+            t.setExpired(true);
+        });
+        tokenBlacklistRepository.saveAll(validToken);
     }
 }

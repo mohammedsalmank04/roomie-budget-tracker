@@ -37,6 +37,8 @@ public class Accounts implements UserDetails {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address addressId;
+    @OneToMany(mappedBy = "account")
+    private List<TokenBlacklist> tokens;
 
 
     @Override

@@ -9,6 +9,7 @@ import com.salman.roomieBudgetTracker.service.AccountsService;
 import com.salman.roomieBudgetTracker.service.StatesService;
 
 import com.salman.roomieBudgetTracker.util.AuthenticateRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -68,12 +69,14 @@ public class AccountsController {
        Accounts account= accountsService.authenticate(user);
 
         Address address = account.getAddressId();
-       System.out.println(account);
+       //System.out.println(account);
         model.addAttribute("account",account);
         model.addAttribute("address",address);
 
         return "home";
    }
+
+
 
 
 }

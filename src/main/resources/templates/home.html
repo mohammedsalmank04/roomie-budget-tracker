@@ -39,7 +39,9 @@
             </li>
             <div class="login">
                 <li>
-                    <a href="login.html"  class="navlogin active">Logout</a>
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit"  class="navlogin active">Logout</button>
+                    </form>
                 </li>
             </div>
         </ul>
@@ -63,6 +65,11 @@
 
 </P>
 <script src="javascript/index.js"></script>
+<script>
+function myLogout() {
+  location.href = "/logout";
+}
+</script>
 </body>
 
 </html>
